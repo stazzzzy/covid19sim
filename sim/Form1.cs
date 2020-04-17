@@ -53,7 +53,6 @@ namespace WindowsFormsApp1
             for(int i=0;i<sample_size;i++)
             {
                 people[i] = new Person(i,false,rnd.Next(1,100));
-                //Console.WriteLine("Person #" + i + " created!");
             }
             people[0].infect(); //Infect the first person
         }
@@ -62,7 +61,7 @@ namespace WindowsFormsApp1
             infected = 0; symptoms = 0; recovered = 0; healthy = sample_size; dead = 0;
             for (int i=0;i<sample_size;i++)
             {
-                var names = people[i].Advance();
+                var names = people[i].Advance(); //Take a total count of statuses in all people defined by sample size
                 infected += names.Item1;
                 symptoms += names.Item2;
                 recovered += names.Item3;
@@ -74,7 +73,8 @@ namespace WindowsFormsApp1
         }
         private void spread_infection()
         {
-            for(int i = 0; i < infected * 2; i++)
+            for(int i = 0; i < infected * 2; i++) //method to determine infection rate (Every 1 infected can infect 2)
+                                                  // [SUBJECT TO CHANGE!]
             {
                 int index = rnd.Next(0, people.Length);
                 if(!people[index].is_dead() && !people[index].is_recovered())

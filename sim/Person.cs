@@ -11,12 +11,12 @@ namespace WindowsFormsApp1
         private readonly int id;
         Boolean infected, symptoms, recovered, dead;
         int days_since_infection = 0;
-        int seed;
+        int seed;   //Random seed to determine recovery/death
 
         public Person(int i, Boolean x, int s)
         {
             id = i;
-            seed = s; //op
+            seed = s;
             infected = false;
             symptoms = false;
             recovered = false;
@@ -39,7 +39,7 @@ namespace WindowsFormsApp1
         {
             infected = true;
         }
-        public Tuple<int,int,int,int,int> Advance()
+        public Tuple<int,int,int,int,int> Advance()     //Tuple returned is status of person after 1 day advance
         {
             Random rnd = new Random();
             if (!dead && infected)
@@ -49,7 +49,7 @@ namespace WindowsFormsApp1
                 {
                     symptoms = true;
                 }
-                else if (days_since_infection >= 15)
+                else if (days_since_infection >= 15)        //Statements below determine if a person recovers or dies
                 {
                     if (seed <= 9)
                     {
