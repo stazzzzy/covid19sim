@@ -52,9 +52,9 @@ namespace WindowsFormsApp1
             healthy = sample_size;
             for(int i=0;i<sample_size;i++)
             {
-                people[i] = new Person(i,false,rnd.Next(1,100));
+                people[i] = new Person(i,false,rnd.Next(1,100),rnd.Next(1,100));
             }
-            people[0].infect(); //Infect the first person
+            people[0].true_infect(); //Infect the first person
         }
         private void next_day()
         {
@@ -73,7 +73,7 @@ namespace WindowsFormsApp1
         }
         private void spread_infection()
         {
-            for(int i = 0; i < infected * 2; i++) //method to determine infection rate (Every 1 infected can infect 2)
+            for(int i = 0; i < infected ; i++) //method to determine infection rate (Every 1 infected can infect 2)
                                                   // [SUBJECT TO CHANGE!]
             {
                 int index = rnd.Next(0, people.Length);
@@ -87,7 +87,7 @@ namespace WindowsFormsApp1
         private void next_day_clicked(object sender, EventArgs e) //Button action
         {
             next_day();
-            chart.Series[0].Points.AddXY(day, healthy);
+            //chart.Series[0].Points.AddXY(day, healthy);
             chart.Series[1].Points.AddXY(day, infected);
             chart.Series[2].Points.AddXY(day, dead);
             day += 1;

@@ -9,11 +9,12 @@ namespace WindowsFormsApp1
     class Person
     {
         private readonly int id;
-        Boolean infected, symptoms, recovered, dead;
+        Boolean infected, symptoms, recovered, dead, quaran;
         int days_since_infection = 0;
         int seed;   //Random seed to determine recovery/death
+        int seed_2;
 
-        public Person(int i, Boolean x, int s)
+        public Person(int i, Boolean x, int s, int s2)
         {
             id = i;
             seed = s;
@@ -22,6 +23,15 @@ namespace WindowsFormsApp1
             recovered = false;
             dead = false;
             days_since_infection = 0;
+            if(s2 > 85)
+            {
+                quaran = false;
+            }
+            else
+            {
+                quaran = true;
+            }
+
         }
         public Boolean Is_infected()
         {
@@ -36,6 +46,13 @@ namespace WindowsFormsApp1
             return recovered;
         }
         public void infect()
+        {
+            if (!quaran || (quaran && seed < 9))
+            {
+                infected = true;
+            }
+        }
+        public void true_infect()
         {
             infected = true;
         }
