@@ -18,10 +18,14 @@ namespace WindowsFormsApp1
         int infected, symptoms, recovered, healthy, dead;
         int day = 0;
 
-        public Form1()
+        public Form1() //Initialize components on main window
         {
             InitializeComponent();
+            chart.Series[0].Name = "Healthy"; // May be removed at some point
+            chart.Series[1].Name = "Infected";
+            chart.Series[2].Name = "Dead";
         }
+        
 
         private void button1_Click(object sender, EventArgs e) //Button action
         {
@@ -52,7 +56,7 @@ namespace WindowsFormsApp1
             healthy = sample_size;
             for(int i=0;i<sample_size;i++)
             {
-                people[i] = new Person(i,false,rnd.Next(1,100),rnd.Next(1,100));
+                people[i] = new Person(i,false,rnd.Next(1,100),rnd.Next(1,100), rnd.Next(1, 100));
             }
             people[0].true_infect(); //Infect the first person
         }
@@ -87,7 +91,7 @@ namespace WindowsFormsApp1
         private void next_day_clicked(object sender, EventArgs e) //Button action
         {
             next_day();
-            //chart.Series[0].Points.AddXY(day, healthy);
+            //chart.Series[0].Points.AddXY(day, healthy); //May be removed
             chart.Series[1].Points.AddXY(day, infected);
             chart.Series[2].Points.AddXY(day, dead);
             day += 1;
